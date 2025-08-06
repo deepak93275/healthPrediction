@@ -44,11 +44,24 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const signup = async (name: string, email: string, password: string) => {
     setIsLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', { name, email, password });
-      setUser(res.data.user);
-      localStorage.setItem('token', res.data.token);
+      const res = await fetch('http://localhost:5000/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+  
+      if (!res.ok) {
+        throw new Error('Signup failed');
+      }
+  
+      const data = await res.json();
+      setUser(data.user);
+      localStorage.setItem('token', data.token);
       return true;
-    } catch {
+    } catch (error) {
+      console.error('Signup error:', error);
       return false;
     } finally {
       setIsLoading(false);
