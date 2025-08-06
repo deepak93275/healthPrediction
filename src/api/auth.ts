@@ -1,6 +1,5 @@
-// src/api/auth.ts
 export const signupUser = async (userData: any) => {
-  const res = await fetch('http://localhost:5000/api/auth/signup', {
+  const res = await fetch('https://healthprediction-y8k1.onrender.com/api/auth/register', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(userData),
@@ -9,7 +8,7 @@ export const signupUser = async (userData: any) => {
 };
 
 export const loginUser = async (userData: any) => {
-  const res = await fetch('http://localhost:5000/api/auth/login', {
+  const res = await fetch('https://healthprediction-y8k1.onrender.com/api/auth/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(userData),
